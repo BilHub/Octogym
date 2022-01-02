@@ -1,0 +1,1 @@
+- est ce que l'authentication marche avec "djoser et JWT" ou avec "SessionAuthentication" qui fait appel a csrfToken

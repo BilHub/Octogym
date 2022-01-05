@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 
 /// React router dom
-import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
 /// Css
 import "./index.css";
 import "./chart.css";
-
 
 /// Layout
 import Nav from "./layouts/nav";
@@ -31,37 +35,34 @@ import PlaningCreate from "./components/planning/PlanningCreate";
 import PlaningEdit from "./components/planning/PlanningEdit";
 import Calendar from "./components/planning/Calendar";
 
-
-
-import TransactionsList from "./components/transactions/TransactionsList"
-import TransactionDetail from "./components/transactions/TransactionDetail"
+import TransactionsList from "./components/transactions/TransactionsList";
+import TransactionDetail from "./components/transactions/TransactionDetail";
 // Personnels Imports
-import PersonnelList from './components/personnels/PersonnelList'
-import PersonnelDetail from './components/personnels/PersonnelDetail'
-import PersonnelEdit from './components/personnels/PersonnelEdit'
-import PersonnelCreate from './components/personnels/PersonnelCreate'
+import PersonnelList from "./components/personnels/PersonnelList";
+import PersonnelDetail from "./components/personnels/PersonnelDetail";
+import PersonnelEdit from "./components/personnels/PersonnelEdit";
+import PersonnelCreate from "./components/personnels/PersonnelCreate";
 
 // Coachs Imports
-import CoachList from './components/coachs/CoachList'
+import CoachList from "./components/coachs/CoachList";
 
-import CoachDetail from './components/coachs/CoachDetail'
-import CoachEdit from './components/coachs/CoachEdit'
-import CoachCreate from './components/coachs/CoachCreate'
+import CoachDetail from "./components/coachs/CoachDetail";
+import CoachEdit from "./components/coachs/CoachEdit";
+import CoachCreate from "./components/coachs/CoachCreate";
 
 import Customers from "./components/AppsMenu/Shop/Customers/Customers";
 import Invoice from "./components/AppsMenu/Shop/Invoice/Invoice";
 
 //// PaiementCreate
-import PaiementCreate from "./components/transactions/PaiementCreate"
-import AutreCreate from "./components/transactions/AutreCreate"
-import AssuranceCreate from "./components/transactions/AssuranceCreate"
-import RemCreate from "./components/transactions/RemCreate"
-import RemCoachCreate from "./components/transactions/RemCoachCreate"
-/// Abonnements 
-import AbonnementList from "./components/abonnement/AbonnementList"
-import AbonnementEdit from "./components/abonnement/AbonnementEdit"
-import AbonnementCreate from "./components/abonnement/AbonnementCreate"
-
+import PaiementCreate from "./components/transactions/PaiementCreate";
+import AutreCreate from "./components/transactions/AutreCreate";
+import AssuranceCreate from "./components/transactions/AssuranceCreate";
+import RemCreate from "./components/transactions/RemCreate";
+import RemCoachCreate from "./components/transactions/RemCoachCreate";
+/// Abonnements
+import AbonnementList from "./components/abonnement/AbonnementList";
+import AbonnementEdit from "./components/abonnement/AbonnementEdit";
+import AbonnementCreate from "./components/abonnement/AbonnementCreate";
 
 /// Table
 import DataTable from "./components/table/DataTable";
@@ -84,8 +85,7 @@ import Error404 from "./pages/Error404";
 import Error500 from "./pages/Error500";
 import Error503 from "./pages/Error503";
 
-
-import Tresorie from "./components/tresorie/Tresorie"
+import Tresorie from "./components/tresorie/Tresorie";
 
 /// Dashboard
 import Home from "./components/Dashboard/Home";
@@ -94,30 +94,32 @@ import CoinDetails from "./components/Dashboard/CoinDetails";
 import Portofolio from "./components/Dashboard/Portofolio";
 import Transactions from "./components/Dashboard/Transactions";
 import MarketCapital from "./components/Dashboard/MarketCapital";
-import Configuration from './components/configuration/Configuration'
+import Configuration from "./components/configuration/Configuration";
+import PrivateRoute from "./context/PrivateRoute";
+import { AuthProvider } from "./context/AuthContext";
 const Markup = () => {
   let path = window.location.pathname;
   path = path.split("/");
   path = path[path.length - 1];
   let pagePath = path.split("-").includes("login");
-  
+
   const [activeEvent, setActiveEvent] = useState(!path);
 
   const routes = [
     /// Dashboard
-    { url: "", component: Home },
-    { url: "login", component: Login },
+    // { url: "", component: Home },
+    // { url: "login", component: Login },
     { url: "my-wallet", component: Wallet },
     { url: "coin-details", component: CoinDetails },
     { url: "portfolio", component: Portofolio },
     { url: "market-capital", component: MarketCapital },
-    
+
     /// Apps
     // { url: "app-profile", component: AppProfile },
-    
+
     // { url: "app-calender", component: Calendar },
     // { url: "post-details", component: PostDetails },
-    
+
     /// Widget
     // { url: "widget-basic", component: Widget },
     /// CONFIGURATION
@@ -135,14 +137,13 @@ const Markup = () => {
     { url: "presences", component: PresenceList },
     // { url: "presence/detail/:id", component: PresenceDetail },
     // { url: "presence/edit/:id", component: PresenceEdit },
-    
-   
+
     { url: "client/create", component: ClientCreate },
     { url: "client/:id", component: ClientDetail },
     { url: "client/edit/:id", component: EditClient },
     // { url: "create/abonnee/new", component: Clients },
     // { url: "create/abonnee/new", component: Clients },
-    
+
     // { url: "hashtag", component: EditProfile },
 
     // { url: "create/salle", component: SalleCreate },
@@ -152,15 +153,15 @@ const Markup = () => {
     { url: "planning/edit/:id", component: PlaningEdit },
     { url: "planning/calendar", component: Calendar },
     { url: "creneaux", component: Calendar },
-    
+
     // { urlPlaningEdit: "create/planning", component: PlaningCreate },   PlaningEdit
-    
+
     // Personnels URLS
     { url: "personnel", component: PersonnelList },
     { url: "personnel/create", component: PersonnelCreate },
     { url: "personnel/edit/:id", component: PersonnelEdit },
     { url: "personnel/:id", component: PersonnelDetail },
-    
+
     // Coachs URLS
     { url: "coach", component: CoachList },
     { url: "coach/create", component: CoachCreate },
@@ -173,14 +174,14 @@ const Markup = () => {
     { url: "assurance/create", component: AssuranceCreate },
     { url: "remuneration/coach/create", component: RemCoachCreate },
     { url: "remuneration/create", component: RemCreate },
-    
+
     /// Transactions
     { url: "transactions", component: TransactionsList },
     // { url: "transactions/create", component: TransactionCreate },
     // { url: "transactions/edit/:id", component: TransactionEdit },
     { url: "transactions/:id", component: TransactionDetail },
     // Abonnements
-    
+
     { url: "abonnements", component: AbonnementList },
     { url: "abonnements/edit/:id", component: AbonnementEdit },
     { url: "abonnements/create", component: AbonnementCreate },
@@ -208,42 +209,47 @@ const Markup = () => {
 
   return (
     <Router basename="/">
-      {/* <Redirect from='/' to='/login' /> */}
-      <div
-        id={`${!pagePath ? "main-wrapper" : ""}`}
-        className={`${!pagePath ? "show menu-toggle" : "mh100vh"}`}
-      >
-        {!pagePath && (
-          <Nav
-            onClick={() => setActiveEvent(!activeEvent)}
-            activeEvent={activeEvent}
-            onClick2={() => setActiveEvent(false)}
-            onClick3={() => setActiveEvent(true)}
-          />
-        )}
+      <AuthProvider>
+        {/* <Redirect from='/' to='/login' /> */}
         <div
-          className={` ${!path && activeEvent ? "rightside-event" : ""} ${
-            !pagePath ? "content-body" : ""
-          }`}
+          id={`${!pagePath ? "main-wrapper" : ""}`}
+          className={`${!pagePath ? "show menu-toggle" : "mh100vh"}`}
         >
+          {!pagePath && (
+            <Nav
+              onClick={() => setActiveEvent(!activeEvent)}
+              activeEvent={activeEvent}
+              onClick2={() => setActiveEvent(false)}
+              onClick3={() => setActiveEvent(true)}
+            />
+          )}
           <div
-            className={`${!pagePath ? "container-fluid" : ""}`}
-            style={{ minHeight: window.screen.height - 60 }}
+            className={` ${!path && activeEvent ? "rightside-event" : ""} ${
+              !pagePath ? "content-body" : ""
+            }`}
           >
-            <Switch>
-              {routes.map((data, i) => (
-                <Route
-                  key={i}
-                  exact
-                  path={`/${data.url}`}
-                  component={data.component}
-                />
-              ))}
-            </Switch>
+            <div
+              className={`${!pagePath ? "container-fluid" : ""}`}
+              style={{ minHeight: window.screen.height - 60 }}
+            >
+              <Switch>
+                <PrivateRoute component={Home} path="/" exact />
+                <Route component={Login} path="/login" />
+
+                {routes.map((data, i) => (
+                  <Route
+                    key={i}
+                    exact
+                    path={`/${data.url}`}
+                    component={data.component}
+                  />
+                ))}
+              </Switch>
+            </div>
           </div>
+          {!pagePath && <Footer />}
         </div>
-        {!pagePath && <Footer />}
-      </div>
+      </AuthProvider>
     </Router>
   );
 };

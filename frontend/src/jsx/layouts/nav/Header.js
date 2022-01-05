@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 /// Scroll
 import PerfectScrollbar from "react-perfect-scrollbar";
 
@@ -8,6 +8,7 @@ import PerfectScrollbar from "react-perfect-scrollbar";
 import profile from "../../../images/profile/pic1.jpg";
 import avatar from "../../../images/avatar/1.jpg";
 import { Dropdown } from "react-bootstrap";
+import AuthContext from "../../context/AuthContext";
 
 const Header = ({ onNote, toggle, onProfile, onNotification, onClick }) => {
   var path = window.location.pathname.split("/");
@@ -19,6 +20,8 @@ const Header = ({ onNote, toggle, onProfile, onNotification, onClick }) => {
     : filterName.includes("ui")
     ? filterName.filter((f) => f !== "app")
     : filterName;
+  const { username, logoutUser } = useContext(AuthContext);
+
   return (
     <div className="header">
       <div className="header-content">
@@ -29,7 +32,6 @@ const Header = ({ onNote, toggle, onProfile, onNotification, onClick }) => {
                 className="dashboard_bar"
                 style={{ textTransform: "capitalize" }}
               >
-                <p>hello</p>
                 {finalName.join(" ").length === 0
                   ? "Dashboard"
                   : finalName.join(" ")}
@@ -381,6 +383,21 @@ const Header = ({ onNote, toggle, onProfile, onNotification, onClick }) => {
               </Dropdown>
             </ul> */}
           </div>
+          {username ? (
+            <div>
+              <div className="d-flex ">
+                <h2 className="mx-2 text-success">Bonjour,</h2>
+                <h2 className="text-success">{username}</h2>
+              </div>
+              <button onClick={logoutUser}>Logout</button>
+            </div>
+          ) : (
+            <div className=" mt-3 float-end">
+              <button className="btn btn-danger">
+                <Link to="/login">Login</Link>
+              </button>
+            </div>
+          )}
         </nav>
       </div>
     </div>

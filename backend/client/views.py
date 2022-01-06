@@ -17,16 +17,17 @@ class StandardResultsSetPagination(pagination.PageNumberPagination):
     page_size_query_param = 'page_size'
     max_page_size = 100
 
-
 class ClientAPIView(generics.CreateAPIView):
+    permission_classes = (AllowAny, )
     serializer_class = ClientCreateSerialiser
     queryset = Client.objects.all()
     parser_classes = [MultiPartParser, FormParser]
 
-    # lookup_field = 'slug'
+   # lookup_field = 'slug'
    # permission_classes = (AllowAny, )
 
 class ClientListAPIView(AutoPrefetchViewSetMixin, generics.ListAPIView):
+    permission_classes = (AllowAny, )
     pagination_class = StandardResultsSetPagination
 
     queryset = Client.objects.all()
@@ -50,7 +51,6 @@ class ClientDetailAPIView(generics.RetrieveUpdateAPIView):
     queryset = Client.objects.all()
     # permission_classes = (IsAuthenticated,)
     serializer_class = ClientSerialiser
-    # permission_classes = (AllowAny, )
     def get_object(self):
         obj = get_object_or_404(Client.objects.filter(id=self.kwargs["pk"]))
         return obj

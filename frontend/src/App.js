@@ -25,18 +25,16 @@ const App = ({ width }) => {
   body.setAttribute("direction", "ltr");
 
   //  width < 2300
-    // ? body.setAttribute("data-sidebar-style", "mini")
-    // : width <= 768
-    // ? body.setAttribute("data-sidebar-style", "overlay")
-    // : body.setAttribute("data-sidebar-style", "full");
+  // ? body.setAttribute("data-sidebar-style", "mini")
+  // : width <= 768
+  // ? body.setAttribute("data-sidebar-style", "overlay")
+  // : body.setAttribute("data-sidebar-style", "full");
 
-
-    width >= 768 && width < 1300
+  width >= 768 && width < 1300
     ? body.setAttribute("data-sidebar-style", "mini")
     : width <= 768
     ? body.setAttribute("data-sidebar-style", "overlay")
     : body.setAttribute("data-sidebar-style", "full");
-
 
   return (
     <Fragment>

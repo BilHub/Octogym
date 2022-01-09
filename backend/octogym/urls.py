@@ -13,7 +13,7 @@ urlpatterns = [
     path('rest-api/auth/', include('djoser.urls.jwt')),
     path('admin/', admin.site.urls),
     path('rest-api/', include('client.urls')),
-    path('rest-api/api-auth/', include('rest_framework.urls')),
+    # path('', include('rest_framework.urls')),
     path('rest-api/creneau/', include('creneau.urls')),
     path('rest-api/materiel/', include('materiel.urls')),
     path('rest-api/presence/', include('presence.urls')),
@@ -27,8 +27,6 @@ urlpatterns = [
     # path ('',TemplateView.as_view(template_name="index.html"), name='index'),
     # re_path(r'^(?:.*)/?$', TemplateView.as_view(template_name="index.html"), name='index'),
 ]
-
-
 
 # urlpatterns += [re_path(r'^.*', TemplateView.as_view(template_name='index.html'))]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

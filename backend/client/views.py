@@ -45,8 +45,6 @@ class ClientNamesDropListAPIView(generics.ListAPIView):
     permission_classes = (AllowAny, )
 
 
-
-
 class ClientDetailAPIView(generics.RetrieveUpdateAPIView):
     queryset = Client.objects.all()
     # permission_classes = (IsAuthenticated,)
@@ -63,8 +61,6 @@ class ClientDetailAPIView(generics.RetrieveUpdateAPIView):
         #     msg = 'le client nexiste pas'
             # return Response({'message': msg}, status=404)
 
-
-
 class ClientDestroyAPIView(generics.DestroyAPIView):
     queryset = Client.objects.all()
     serializer_class = ClientSerialiser
@@ -78,13 +74,10 @@ class ClientDestroyAPIView(generics.DestroyAPIView):
 #################  PERSONNEL  ##################
 ################################################
 
-
 class PersonnelCreateAPIView(generics.CreateAPIView):
     queryset = Personnel.objects.all()
     serializer_class = PersonnelSerializer
     permission_classes = (AllowAny, )
-
-
 
 class PersonnelListAPIView(generics.ListAPIView):
     queryset = Personnel.objects.all()
@@ -117,17 +110,14 @@ class PersonnelDestroyAPIView(generics.DestroyAPIView):
 class CoachCreateAPIView(generics.CreateAPIView):
     queryset = Coach.objects.all()
     serializer_class = CoachSerializer
-    permission_classes = (AllowAny, )
-
-
+    # permission_classes = (AllowAny, )
 
 class CoachListAPIView(generics.ListAPIView):
+    # permission_classes = (AllowAny, )
     queryset = Coach.objects.all()
-    permission_classes = (IsAuthenticated,)
+    # permission_classes = (IsAuthenticated,)
     serializer_class = CoachSerializer
     # lookup_field = 'slug'
-    permission_classes = (AllowAny, )
-
 
 class CoachDetailAPIView(generics.RetrieveUpdateAPIView):
     queryset = Coach.objects.all()
@@ -144,12 +134,12 @@ class CoachDestroyAPIView(generics.DestroyAPIView):
     queryset = Coach.objects.all()
     serializer_class = CoachSerializer
     # lookup_field = 'slug'
-    permission_classes = (AllowAny, )
+    # permission_classes = (AllowAny, )
 
 class MaladieCreateAPIView(generics.CreateAPIView):
     queryset = Maladie.objects.all()
     serializer_class = MaladieSerializer
-    permission_classes = (AllowAny, )
+    permission_classes = (AllowAny,)
 
 class MaladieViewSet(viewsets.ViewSet):
     queryset = Maladie.objects.all()
